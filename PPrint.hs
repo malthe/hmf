@@ -26,7 +26,7 @@ module PPrint
         , (<>)
         , (<+>)
         , (</>), (<//>)
-        , (<$>), (<$$>)
+        , (PPrint.<$>), (<$$>)
 
         , sep, fillSep, hsep, vsep
         , cat, fillCat, hcat, vcat
@@ -60,7 +60,7 @@ module PPrint
         , writeDoc
         ) where
 
-import IO           -- (Handle,hPutStr,hPutChar,stdout,openFile,hClose)
+import System.IO           -- (Handle,hPutStr,hPutChar,stdout,openFile,hClose)
 
 
 infixr 5 </>,<//>,<$>,<$$>
@@ -96,7 +96,7 @@ punctuate p (d:ds)  = (d <> p) : punctuate p ds
 sep             = group . vsep
 fillSep         = fold (</>)
 hsep            = fold (<+>)
-vsep            = fold (<$>)
+vsep            = fold (PPrint.<$>)
 
 cat             = group . vcat
 fillCat         = fold (<//>)

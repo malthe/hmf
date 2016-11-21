@@ -36,7 +36,7 @@
 --------------------------------------------------------------------------
 module Parser( readTerm, readType ) where
 
-import Char
+import Data.Char
 import Text.ParserCombinators.Parsec
 import qualified Text.ParserCombinators.Parsec.Token as P
 import Text.ParserCombinators.Parsec.Language( haskellDef )

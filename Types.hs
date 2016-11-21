@@ -33,7 +33,7 @@ module Types(
 
             ) where
 
-import List( partition )
+import Data.List( partition )
 import PPrint
 import Data.IORef( IORef, readIORef )
 import System.IO.Unsafe( unsafePerformIO )
