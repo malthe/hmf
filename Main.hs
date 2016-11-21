@@ -1,9 +1,11 @@
+{-# LANGUAGE ScopedTypeVariables #-}
+
 --------------------------------------------------------------------------
 -- Main module:
 --------------------------------------------------------------------------
 module Main where
 
-import qualified Control.Exception as Exn ( catch )
+import qualified Control.Exception as Exn ( catch, SomeException )
 import PPrint
 import Types ( Type, Feature(..) )
 import Parser( readType, readTerm )
@@ -254,14 +256,14 @@ test1 (input,Ok resultTp)
        if (show tp == show resultTp) 
         then testOk ""
         else testFailed (": test was expected to have type: " ++ show resultTp)
-    `Exn.catch` \err ->
+    `Exn.catch` \(err :: Exn.SomeException) ->
       do putStrLn (show err)
          testFailed (": test should be accepted with type: " ++ show resultTp)
        
 test1 (input, Wrong)
   = do inference input
        testFailed ": a type error was expected"
-    `Exn.catch` \err ->
+    `Exn.catch` \(err :: Exn.SomeException) ->
       do putStrLn (show err)
          testOk " (the input was justly rejected)"
 
